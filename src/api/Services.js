@@ -8,6 +8,7 @@ export default {
     if (param) {
       url = path.resolve(url, param)
     }
+    console.log('url request: ' + url)
     return Api().get(url)
   },
 
@@ -20,9 +21,13 @@ export default {
     return Api().get(url)
   },
 
-  // add product to cart
-  addToCart (productId) {
-    return Api().post('cart/add/' + productId)
+  // udpate number of views product
+  updateViewProduct (productId) {
+    var url = 'products/product/update'
+    if (productId) {
+      url = path.resolve(url, productId)
+    }
+    return Api().post(url)
   },
 
   // load category product

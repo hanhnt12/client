@@ -8,16 +8,23 @@ const debug = process.env.NODE_ENV !== 'production'
 export default new Vuex.Store({
   strict: debug,
   state: {
+    status,
     categories: []
   },
   mutations: {
     setCategories (state, categories) {
       state.categories = categories
+    },
+    handleError (state, status) {
+      state.status = status
     }
   },
   actions: {
     setCategories ({commit}, categories) {
       commit('setCategories', categories)
+    },
+    handleError ({commit}, status) {
+      commit('handleError', status)
     }
   }
 })

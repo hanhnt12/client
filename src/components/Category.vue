@@ -10,7 +10,9 @@
   </div>
   <div class="container">
     <div class="row">
-      <div v-for="category in categories" class="col-lg-4 col-md-6 text-center">
+      <div v-for="category in categories" 
+        :key="category._id" 
+        class="col-lg-4 col-md-6 text-center">
         <div class="service-box">
           <!-- <i class="fa fa-4x fa-diamond text-primary sr-icons"></i> -->
           <img class="img-circle img-responsive" 
@@ -46,12 +48,10 @@ export default {
         // call service to get list categories
         const categories = await Services.getCategory()
         this.categories = categories.data
-        // setting to store
         this.$store.dispatch('setCategories', categories)
-        return this.categories
         // setting list categories to global scope
       } catch (e) {
-        this.$emit('error', e)
+        this.$store.dispatch('handleError', 'failed')
       }
     },
     cutCharacter (input) {
