@@ -57,7 +57,7 @@
 import Modal from '@/components/Modal'
 
 export default {
-  name: 'ModalError',
+  name: 'Product',
   components: {
     Modal
   },

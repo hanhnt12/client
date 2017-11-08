@@ -1,46 +1,35 @@
 <template>
-<!-- Page Content -->
-<div class="container">
-
-  <!-- Portfolio Item Heading -->
+<div v-if="product" class="container">
   <h1 class="my-4">{{product.title}}
-    <small>{{product.category.name}}</small>
+    <category-badge :category="product.category.name"></category-badge>
   </h1>
-
-  <!-- Portfolio Item Row -->
   <div class="row">
-
     <div class="col-md-8">
       <img class="img-fluid" :src="getProductImage(product)" alt="">
     </div>
-
     <div class="col-md-4">
-      <h3 class="my-3">Project Description</h3>
-      <p>{{product.description}}</p>
-      <h3 class="my-3">Project Details</h3>
-      <ul>
-        <li>Lorem Ipsum</li>
-        <li>Dolor Sit Amet</li>
-        <li>Consectetur</li>
-        <li>Adipiscing Elit</li>
+      <h3 class="my-3"> Chi tiết</h3>
+      <ul v-if="product.freeItems">
+        <li v-for="free in product.freeItems" :key="free._id">
+          {{free.title}}: {{free.value}}
+        </li>
       </ul>
     </div>
-
-  </div>
-  <!-- /.row -->
-
-  <!-- Related Projects Row -->
-  <h3 class="my-4">Related Image</h3>
-
-  <div class="row">
-
-    <div class="col-md-3 col-sm-6 mb-4" v-for="(img, index) in getOtherImages(product)" :key="index">
-      <a href="#">
-        <img class="img-fluid" :src="img" alt="">
-      </a>
+    <div v-if="product.description" class="col-md-12">
+      <h3 class="my-3"> Mô tả sản phẩm</h3>
+      <p>{{product.description}}</p>
     </div>
   </div>
   <!-- /.row -->
+  <h3 v-if="otherImage" class="my-4">Related Image</h3>
+  <div class="row">
+    <div class="col-md-3 col-sm-6 mb-4" v-for="(img, index) in otherImage" :key="index">
+      <img class="img-fluid" :src="img" alt="">
+    </div>
+  </div>
+  <!-- /.row -->
+
+  <loader :loading="loading"></loader>
 
 </div>
 <!-- /.container -->
@@ -49,16 +38,20 @@
 <script>
 import Services from '@/api/Services'
 import Common from '@/common'
+import Loader from '@/components/Loader'
+import CategoryBadge from '@/components/CategoryBadge'
 
 export default {
   name: 'ProductDetails',
   components: {
+    Loader,
+    CategoryBadge
   },
 
   data () {
     return {
       loading: false,
-      product: {}
+      product: null
     }
   },
 
@@ -66,7 +59,6 @@ export default {
     // get product details
     async getProduct (productId) {
       try {
-        this.error = this.post = null
         this.loading = true
 
         var response = await Services.getProduct(productId)
@@ -90,17 +82,6 @@ export default {
       return Common.calculatePrice(price)
     },
 
-    // update view
-    async updateViewProduct (productId) {
-      try {
-        // call service to get list categories
-        let result = await Services.updateViewProduct(productId)
-        console.log(result)
-      } catch (e) {
-        this.$store.dispatch('handleError', 'failed')
-      }
-    },
-
     getOtherImages (product) {
       // get default image
       let defaultImage = this.getProductImage(product)
@@ -122,11 +103,14 @@ export default {
 
   created () {
     let productId = this.$route.params.productId
-    this.updateViewProduct(productId)
     this.getProduct(productId)
   },
 
-  computed: {}
+  computed: {
+    otherImage: function () {
+      return this.getOtherImages(this.product)
+    }
+  }
 }
 </script>
 

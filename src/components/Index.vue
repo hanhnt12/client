@@ -1,7 +1,5 @@
 <template>
 <div>
-  <div class="clear-fix">
-  </div>
   <header-bar/>
   <category/>
   <portfolio/>
@@ -35,8 +33,4 @@ export default {
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-.clear-fix {
-    width: 100%;
-    height: 70px;
-}
 </style>

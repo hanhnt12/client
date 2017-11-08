@@ -3,7 +3,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="section-heading">At Your Service</h2>
+        <h2 class="section-heading">Dịch vụ của chúng tôi</h2>
         <hr class="primary">
       </div>
     </div>
@@ -68,11 +68,6 @@ export default {
 <style scoped>
 section {
     padding: 100px 0;
-}
-
-.section-heading {
-    font: normal normal normal 35px/1.4em 'chelsea market',fantasy;
-    color: #8FD3E8;
 }
 
 a.category-details {

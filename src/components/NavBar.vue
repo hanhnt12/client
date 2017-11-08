@@ -1,4 +1,5 @@
 <template>
+<div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
       <div class="container">
@@ -13,21 +14,24 @@
             <li class="nav-item">
               <router-link 
                 class="nav-link js-scroll-trigger" 
-                to="/products">Products</router-link>
+                to="/products">Sản phẩm</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+              <a class="nav-link js-scroll-trigger" href="/#services">Dịch vụ</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a>
+              <a class="nav-link js-scroll-trigger" href="/#portfolio">Gallery</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+              <a class="nav-link js-scroll-trigger" href="/#contact">Liên hệ</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
+    <!-- <div class="clear-fix">
+    </div> -->
+</div>
 </template>
 
 <script>
@@ -41,8 +45,91 @@ export default {
 </script>
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-.navbar {
-  background: rgba(247, 247, 247, 1);
-  opacity: .7;
+.clear-fix {
+    width: 100%;
+    height: 70px;
 }
+
+/* #mainNav {
+  position: absolute;
+  border-bottom: 1px solid #eeeeee;
+  background-color: white;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+} */
+
+#mainNav .navbar-brand {
+  font-weight: 800;
+  color: #777777; 
+}
+
+#mainNav .navbar-nav > li.nav-item > a {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase; 
+}
+
+@media only screen and (min-width: 992px) {
+  #mainNav {
+      border-bottom: 1px solid transparent;
+      background: transparent; 
+  }
+  #mainNav .navbar-brand {
+      padding: 15px 20px;
+      color: #333; 
+  }
+  #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
+      color: #0085A1; 
+  }
+  #mainNav .navbar-nav > li.nav-item > a {
+      padding: 15px 20px;
+      color: #777; 
+  }
+  #mainNav .navbar-nav > li.nav-item > a:focus, #mainNav .navbar-nav > li.nav-item > a:hover {
+      color: #0085A1; 
+  } 
+}
+@media only screen and (min-width: 1170px) {
+  #mainNav {
+      -webkit-transition: background-color 0.2s;
+      -moz-transition: background-color 0.2s;
+      transition: background-color 0.2s;
+      /* Force Hardware Acceleration in WebKit */
+      -webkit-transform: translate3d(0, 0, 0);
+      -moz-transform: translate3d(0, 0, 0);
+      -ms-transform: translate3d(0, 0, 0);
+      -o-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+      -webkit-backface-visibility: hidden; 
+  }
+  #mainNav.is-fixed {
+      /* when the user scrolls down, we hide the header right above the viewport */
+      position: fixed;
+      top: -77px;
+      -webkit-transition: -webkit-transform 0.2s;
+      -moz-transition: -moz-transform 0.2s;
+      transition: transform 0.2s;
+      border-bottom: 1px solid white;
+      background-color: rgba(255, 255, 255, 0.9); 
+  }
+  #mainNav.is-fixed .navbar-brand {
+      color: #333333; 
+  }
+  #mainNav.is-fixed .navbar-brand:focus, #mainNav.is-fixed .navbar-brand:hover {
+      color: #0085A1; 
+  }
+  #mainNav.is-fixed .navbar-nav > li.nav-item > a {
+      color: #333333; 
+  }
+  #mainNav.is-fixed .navbar-nav > li.nav-item > a:focus, #mainNav.is-fixed .navbar-nav > li.nav-item > a:hover {
+      color: #0085A1; 
+  }
+  #mainNav.is-visible {
+      /* if the user changes the scrolling direction, we show the header */
+      -webkit-transform: translate3d(0, 100%, 0);
+      -moz-transform: translate3d(0, 100%, 0);
+      -ms-transform: translate3d(0, 100%, 0);
+      -o-transform: translate3d(0, 100%, 0);
+      transform: translate3d(0, 100%, 0); } 
+  }
 </style>

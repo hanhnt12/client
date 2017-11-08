@@ -6,18 +6,22 @@
       <div id="carouselImage" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li v-for="(image, index) in product.image" :key="image._id" 
-            data-target="#carouselImage" :data-slide-to="index" :class="{active: index === 0}"></li>
+            data-target="#carouselImage" 
+            :data-slide-to="index" 
+            :class="{active: index === 0}"></li>
         </ol>
         <div class="carousel-inner" role="listbox">
-          <div v-for="(image, index) in product.image" :key="image._id" class="carousel-item text-center" :class="{active: index === 0}">
+          <div v-for="(image, index) in product.image" 
+            :key="image._id" class="carousel-item text-center" 
+            :class="{active: index === 0}">
             <img class="d-block img-fluid img-responsive" :src="image.pathImage" :alt="productName">
             <div class="carousel-caption d-none d-md-block">
               <p class="price">
-                  <s v-if="product.priceSale" class="price-sale">{{product.priceSale}}</s> 
+                  <s v-if="product.priceSale && !isNaN(product.priceSale)" class="price-sale">{{product.priceSale}}</s> 
                   <span v-if="product.price">{{product.price}}</span>
               </p>
               <div>
-                <router-link class="btn btn-theme btn-sm btn-min-block"
+                <router-link class="btn btn-theme btn-sm btn-min-block btn-details"
                   :to="{path: '/product/' + product._id + '/details'}">Chi tiết</router-link>
               </div>
             </div>
@@ -119,5 +123,10 @@ color: #000;
     color: #333;
     background-color: #fff;
     border-color: #fff;
+}
+
+.btn-details {
+  font-weight: bold;
+  line-height: 2em;
 }
 </style>

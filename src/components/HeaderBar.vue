@@ -1,72 +1,70 @@
 <template>
 <header class="intro-header">
-  <div class="container">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="d-block w-100" src="static/img/cal_1.jpg" alt="First slide">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Chó đen</h3>
-            <p>1.800.000</p>
-            <div>
-              <a class="btn btn-theme btn-sm btn-min-block" href="#">Chi tiết</a>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="static/img/cal_2.jpg" alt="Second slide">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Mèo đen</h3>
-            <p>800.000</p>
-            <div>
-              <a class="btn btn-theme btn-sm btn-min-block" href="#">Chi tiết</a>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item">
-          <img class="d-block w-100" src="static/img/cal_3.jpg" alt="Third slide">
-          <div class="carousel-caption d-none d-md-block">
-            <h3>Chó trắng</h3>
-            <p>700.000</p>
-            <div>
-              <a class="btn btn-theme btn-sm btn-min-block" href="#">Chi tiết</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
+  <div class="row">
+    <div class="col-lg-12">
+      <product-carousel :products="products" additionClass="img-header"></product-carousel>
     </div>
   </div>
 </header>
 </template>
 
 <script>
+import ProductCarousel from '@/components/ProductCarousel'
+
 export default {
   name: 'HeaderBar',
+  components: {
+    ProductCarousel
+  },
+
   data () {
-    return {}
+    return {
+      products: [
+        {
+          _id: 1,
+          image: [
+            {
+              pathImage: '/static/img/cal_1.jpg',
+              defaultImage: true
+            }
+          ],
+          title: 'Chó đen',
+          price: 1200,
+          priceSale: 1100
+        },
+        {
+          _id: 2,
+          image: [
+            {
+              pathImage: '/static/img/cal_3.jpg',
+              defaultImage: true
+            }
+          ],
+          title: 'Chó trắng',
+          price: 900,
+          priceSale: 200
+        },
+        {
+          _id: 3,
+          image: [
+            {
+              pathImage: '/static/img/cal_2.jpg',
+              defaultImage: true
+            }
+          ],
+          title: 'Mèo đen',
+          price: 1900,
+          priceSale: 2200
+        }
+      ]
+    }
   }
 }
 </script>
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-.carousel-inner img {
-    width: 100%;
-    max-height: 600px;
-}
+
 
 .ccarousel-control-prev,
 .carousel-control-next {
