@@ -16,8 +16,8 @@
         <div class="carousel-caption d-none d-md-block">
           <h3>{{product.title}}</h3>
           <p class="price">
-            <s v-if="product.priceSale" class="price-sale">{{product.priceSale}}</s> 
-            <span v-if="product.price">{{product.price}}</span>
+            <s v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</s> 
+            <span v-if="product.price">{{calculatePrice(product.price)}}</span>
           </p>
           <div>
             <router-link class="btn btn-theme btn-sm btn-min-block"
@@ -50,7 +50,7 @@ export default {
     }
   },
 
-  props: ['products', 'additionClass'],
+  props: ['products', 'additionClass', 'isHeaderBar'],
 
   components: {
   },
@@ -64,18 +64,18 @@ export default {
         let product = this.products[i]
         productConverted.push({
           _id: product._id,
-          image: this.getProductImage(product),
+          image: this.getProductImage(product, this.isHeaderBar),
           title: product.title || '',
-          price: this.calculatePrice(product.price),
-          priceSale: this.calculatePrice(product.priceSale)
+          price: product.price,
+          priceSale: product.priceSale
         })
       }
       return productConverted
     },
 
     // get product image
-    getProductImage (product) {
-      return Common.getProductImage(product)
+    getProductImage (product, isHeaderBar) {
+      return Common.getProductImage(product, isHeaderBar)
     },
 
     // convert product price

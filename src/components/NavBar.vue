@@ -50,12 +50,12 @@ export default {
     height: 70px;
 }
 
-/* #mainNav {
-  position: absolute;
-  border-bottom: 1px solid #eeeeee;
-  background-color: white;
+#mainNav {
+  /* position: absolute; */
+  border-bottom: 1px solid #333;
+  background: #333;
   font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
-} */
+}
 
 #mainNav .navbar-brand {
   font-weight: 800;

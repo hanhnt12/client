@@ -21,7 +21,7 @@
     </div>
   </div>
   <!-- /.row -->
-  <h3 v-if="otherImage" class="my-4">Related Image</h3>
+  <h3 v-if="otherImage" class="my-4">Hình ảnh khác</h3>
   <div class="row">
     <div class="col-md-3 col-sm-6 mb-4" v-for="(img, index) in otherImage" :key="index">
       <img class="img-fluid" :src="img" alt="">

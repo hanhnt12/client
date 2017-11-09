@@ -2,7 +2,7 @@
 <header class="intro-header">
   <div class="row">
     <div class="col-lg-12">
-      <product-carousel :products="products" additionClass="img-header"></product-carousel>
+      <product-carousel isHeaderBar="true" :products="products" additionClass="img-header"></product-carousel>
     </div>
   </div>
 </header>
@@ -10,6 +10,7 @@
 
 <script>
 import ProductCarousel from '@/components/ProductCarousel'
+import Services from '@/api/Services'
 
 export default {
   name: 'HeaderBar',
@@ -19,45 +20,29 @@ export default {
 
   data () {
     return {
-      products: [
-        {
-          _id: 1,
-          image: [
-            {
-              pathImage: '/static/img/cal_1.jpg',
-              defaultImage: true
-            }
-          ],
-          title: 'Chó đen',
-          price: 1200,
-          priceSale: 1100
-        },
-        {
-          _id: 2,
-          image: [
-            {
-              pathImage: '/static/img/cal_3.jpg',
-              defaultImage: true
-            }
-          ],
-          title: 'Chó trắng',
-          price: 900,
-          priceSale: 200
-        },
-        {
-          _id: 3,
-          image: [
-            {
-              pathImage: '/static/img/cal_2.jpg',
-              defaultImage: true
-            }
-          ],
-          title: 'Mèo đen',
-          price: 1900,
-          priceSale: 2200
-        }
-      ]
+      loading: false,
+      products: []
     }
+  },
+  methods: {
+    // get list products
+    async getBanner () {
+      try {
+        this.loading = true
+
+        var response = await Services.getBannerInfo()
+
+        this.products = response.data
+
+        this.loading = false
+      } catch (e) {
+        this.$emit('error', e)
+        console.log(e)
+      }
+    }
+  },
+  created () {
+    this.getBanner()
   }
 }
 </script>

@@ -33,5 +33,10 @@ export default {
   // get contact informatin
   getContactInfo () {
     return Api().get('contact')
+  },
+
+  // get banner information
+  getBannerInfo () {
+    return Api().get('banner')
   }
 }

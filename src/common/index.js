@@ -21,7 +21,10 @@ export default {
   /**
    * get product details image (default image)
    */
-  getProductImage (product) {
+  getProductImage (product, isHeaderBar) {
+    if (isHeaderBar && product && product.image) {
+      return product.image[0].pathImage
+    }
     // get all image of product
     let images = product.image
     // if have image
