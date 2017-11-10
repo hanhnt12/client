@@ -8,7 +8,7 @@
           :key="category._id"
           :to="{path: '/products/' + category.name}" 
           class="list-group-item"
-          :class="{active: calculateActive(category.name)}">{{convertCategory(category.name)}} &gt;&gt;</router-link>
+          :class="{active: calculateActive(category.name)}">{{category.nameMenu}} &gt;&gt;</router-link>
       </div>
     </div>
     <div class="col-lg-9">
@@ -30,7 +30,9 @@
               </h4>
             </div>
             <div class="card-footer">
-              <h5 class="price">{{calculatePrice(product.price)}}</h5>
+              <s v-if="product.price" class="price">{{calculatePrice(product.price)}}</s>
+              <span v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</span>
+              <span v-else class="price-sale">Liên hệ</span>
             </div>
           </div>
         </div>
@@ -39,9 +41,7 @@
     <!-- /.col-lg-9 -->
   </div>
   <!-- /.row -->
-  <product :showProduct="showProduct" :product="product" @close="showProduct = false"/>
   <images :showImage="showImage" :product="product" @close="showImage = false"/>
-  <loader :loading="loading"></loader>
 </div>
 <!-- /.container --> 
 </template>
@@ -49,9 +49,7 @@
 <script>
 import Services from '@/api/Services'
 import Common from '@/common'
-import Product from '@/components/Product'
 import Images from '@/components/ImagesSlider'
-import Loader from '@/components/Loader'
 import ProductCarousel from '@/components/ProductCarousel'
 
 export default {
@@ -60,10 +58,7 @@ export default {
   data () {
     return {
       products: [],
-      categories: [],
-      loading: false,
       product: {},
-      showProduct: false,
       images: [],
       showImage: false,
       mostViewProduct: [],
@@ -72,9 +67,7 @@ export default {
   },
 
   components: {
-    Product,
     Images,
-    Loader,
     ProductCarousel
   },
 
@@ -82,47 +75,41 @@ export default {
     // get list products
     async getProducts (category) {
       try {
-        this.loading = true
+        this.$store.dispatch('isLoading', true)
 
         var response = await Services.getProducts(category)
 
+        // when have error
+        if (!response.data || response.data.success === false) {
+          throw new Error()
+        }
+
         this.products = response.data
 
-        this.loading = false
+        this.$store.dispatch('isLoading', false)
       } catch (e) {
-        this.$emit('error', e)
-        console.log(e)
+        this.$store.dispatch('handleError', true)
       }
     },
 
     // get most view product to display carousel
     async getProductsMostView () {
       try {
-        this.loading = true
+        this.$store.dispatch('isLoading', true)
 
         var response = await Services.getProducts('most_view')
+
+        // when have error
+        if (!response.data || response.data.success === false) {
+          throw new Error()
+        }
 
         // create mostview products
         this.mostViewProduct = response.data
 
-        this.loading = false
+        this.$store.dispatch('isLoading', false)
       } catch (e) {
-        this.$emit('error', e)
-        console.log(e)
-      }
-    },
-
-    // load categories on start up
-    async getCategories () {
-      try {
-        this.loading = true
-        // call service to get list categories
-        const categories = await Services.getCategory()
-        this.categories = categories.data
-
-        this.loading = false
-      } catch (e) {
-        this.$store.dispatch('handleError', 'failed')
+        this.$store.dispatch('handleError', true)
       }
     },
 
@@ -141,37 +128,37 @@ export default {
       return Common.cutCharacter(input, 100)
     },
 
-    convertCategory (category) {
-      return Common.convertCategory(category)
-    },
-
     // calculate active link category
     calculateActive (category) {
       return category === this.activeLink
     },
 
-    showProducts (product) {
-      product.imagePath = this.getProductImage(product)
-      product.price = this.calculatePrice(product.price)
-      product.priceSale = this.calculatePrice(product.priceSale)
-      this.product = product
-      this.showProduct = true
-    },
-
     showImages (product) {
       product.price = this.calculatePrice(product.price)
+
       product.priceSale = this.calculatePrice(product.priceSale)
+
       this.product = product
+
       this.showImage = true
     }
   },
   created () {
     let category = this.$route.params.category
+
     this.activeLink = category
-    this.getCategories()
+
     this.getProducts(category)
+
     this.getProductsMostView()
   },
+
+  computed: {
+    categories: function () {
+      return this.$store.state.categories
+    }
+  },
+
   watch: {
     // call again the method if the route changes
     '$route.params.category': function (category) {
@@ -184,6 +171,14 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.price {
+  font-size: 1vw
+}
+
+.price-sale {
+  font-size: 1.5vw
+}
+
 .img-product {
   max-height: 150px;
 }

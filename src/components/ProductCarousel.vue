@@ -13,11 +13,11 @@
         v-for="(product, index) in productSlide" 
         :key="product._id" :class="{active: index === 0}">
         <img class="d-block img-fluid img-responsive" :class="newClass" :src="product.image">
-        <div class="carousel-caption d-none d-md-block">
-          <h3>{{product.title}}</h3>
-          <p class="price">
-            <s v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</s> 
-            <span v-if="product.price">{{calculatePrice(product.price)}}</span>
+        <div class="carousel-caption d-md-block">
+          <h4>{{product.title}}</h4>
+          <p>
+            <s v-if="product.price" class="price">{{calculatePrice(product.price)}}</s> 
+            <span v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</span>
           </p>
           <div>
             <router-link class="btn btn-theme btn-sm btn-min-block"
@@ -59,9 +59,11 @@ export default {
     // get most view product to display carousel
     createProduct () {
       let productConverted = []
+
       // create product for display in slide
       for (let i = 0; i < this.products.length; i++) {
         let product = this.products[i]
+
         productConverted.push({
           _id: product._id,
           image: this.getProductImage(product, this.isHeaderBar),
@@ -70,6 +72,7 @@ export default {
           priceSale: product.priceSale
         })
       }
+
       return productConverted
     },
 
@@ -94,6 +97,7 @@ export default {
     productSlide: function () {
       return this.createProduct()
     },
+
     newClass: function () {
       if (this.additionClass) {
         return this.additionClass
@@ -106,14 +110,6 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.price {
-  font-size: 30px;
-}
-
-.price-sale {
-  font-size: 20px;
-}
-
 .carousel-inner .img-default {
     width: 100%;
     height: 300px;
@@ -122,6 +118,7 @@ export default {
 .carousel-inner .img-header {
     width: 100%;
     max-height: 700px;
+    min-height: 200px;
 }
 
 .ccarousel-control-prev,
@@ -143,8 +140,9 @@ export default {
     color: #f8f8f8;
 }
 
-.carousel-caption h3 {
+.carousel-caption h4 {
     font: normal normal normal 70px/1.4em 'chelsea market',fantasy;
+    font-size: 3.5vw;
     color: #486A74;
 }
 

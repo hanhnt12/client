@@ -1,6 +1,8 @@
 <template>
 <modal v-if="showImage" @close="$emit('close')">
-  <h3 slot="header">{{product.title}}</h3>
+  <h3 slot="header">{{product.title}}
+    <category-badge :category="product.category.name"></category-badge>
+  </h3>
   <section slot="body" class="p-0" id="portfolio">
     <div class="container-fluid">
       <div id="carouselImage" class="carousel slide" data-ride="carousel">
@@ -14,11 +16,11 @@
           <div v-for="(image, index) in product.image" 
             :key="image._id" class="carousel-item text-center" 
             :class="{active: index === 0}">
-            <img class="d-block img-fluid img-responsive" :src="image.pathImage" :alt="productName">
-            <div class="carousel-caption d-none d-md-block">
-              <p class="price">
-                  <s v-if="product.priceSale && !isNaN(product.priceSale)" class="price-sale">{{product.priceSale}}</s> 
-                  <span v-if="product.price">{{product.price}}</span>
+            <img class="d-block img-fluid img-responsive" :src="image.pathImage" :alt="product.name">
+            <div class="carousel-caption d-md-block">
+              <p>
+                  <s v-if="product.price" class="price">{{product.price}}</s> 
+                  <span v-if="product.priceSale" class="price-sale">{{product.priceSale}}</span>
               </p>
               <div>
                 <router-link class="btn btn-theme btn-sm btn-min-block btn-details"
@@ -43,41 +45,22 @@
 
 <script>
 import Modal from '@/components/Modal'
+import CategoryBadge from '@/components/CategoryBadge'
+
 export default {
   name: 'ImagesSlider',
+
   components: {
-    Modal
+    Modal,
+    CategoryBadge
   },
 
-  props: ['showImage', 'product'],
-
-  data () {
-    return {
-    }
-  },
-
-  methods: {},
-
-  computed: {},
-  created () {
-  }
+  props: ['showImage', 'product']
 }
 </script>
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-.price {
-  font-weight: bold;
-  font-size: 50px;
-  color: #9D0D0D;
-}
-
-.price-sale {
-font-weight: bold;
-font-size: 30px;
-color: #000;
-}
-
 .carousel-inner img {
     width: 100%;
     max-height: 500px;
@@ -85,12 +68,12 @@ color: #000;
 
 .ccarousel-control-prev,
 .carousel-control-next {
-	opacity: 1;
-	filter: alpha(opacity=100);
-	background-image: none;
-  background-repeat: no-repeat;
-  color: #333;
-	text-shadow: none;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    background-image: none;
+    background-repeat: no-repeat;
+    color: #333;
+    text-shadow: none;
 }
 
 .carousel-caption {
@@ -128,5 +111,11 @@ color: #000;
 .btn-details {
   font-weight: bold;
   line-height: 2em;
+}
+
+@media (max-width: 600px) {
+  .carousel-indicators {
+    bottom: -10px;
+  }
 }
 </style>

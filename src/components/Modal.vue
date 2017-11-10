@@ -27,10 +27,6 @@
 <script>
 export default {
   name: 'Modal',
-  data () {
-    return {
-    }
-  },
 
   props: ['classError']
 }
@@ -39,57 +35,75 @@ export default {
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
 .modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  transition: opacity .3s ease;
-  display: table !important;
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    transition: opacity .3s ease;
+    display: table !important;
 }
 
 .modal-wrapper {
-  vertical-align: middle;
+    vertical-align: middle;
 }
 
 .modal-container {
-  width: 90%;
-  margin: 20px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-  transition: all .3s ease;
-  font-family: Helvetica, Arial, sans-serif;
+    width: 90%;
+    margin: 20px auto;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
 }
 
 .modal-header {
-  padding: 0;
-  color: #555;
-  text-align: center;
+    padding: 0;
+    color: #555;
+    text-align: center;
 }
-/*
- * The following styles are auto-applied to elements with
- * transition="modal" when their visibility is toggled
- * by Vue.js.
- *
- * You can easily play with the modal transition by editing
- * these styles.
- */
 
 .modal-enter {
-  opacity: 0;
+    opacity: 0;
 }
 
 .modal-leave-active {
-  opacity: 0;
+    opacity: 0;
 }
 
 .modal-enter .modal-container,
 .modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+@media (max-width: 600px) {
+    .modal-container {
+        width: 100%;
+        margin: 50px auto;
+        padding: 20px 0px;
+        background-color: #fff;
+        /* border-radius: 2px; */
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+        transition: all .3s ease;
+    }
+
+    .modal-header {
+        padding: 0px 10px;
+        color: #555;
+        text-align: center;
+    }
+
+    .modal-body {
+        padding: 0;
+    }
+
+    .modal-body img {
+        width: 100%;
+        height: 100%;
+    }
 }
 </style>

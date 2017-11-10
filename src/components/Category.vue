@@ -8,7 +8,7 @@
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="container" v-if="categories && categories.length > 0">
     <div class="row">
       <div v-for="category in categories" 
         :key="category._id" 
@@ -31,45 +31,31 @@
 </template>
 
 <script>
-import Services from '@/api/Services'
 import Common from '@/common'
 
 export default {
   name: 'Category',
   data () {
     return {
-      categories: []
     }
   },
+
   methods: {
-    // load categories on start up
-    async getCategories () {
-      try {
-        // call service to get list categories
-        const categories = await Services.getCategory()
-        this.categories = categories.data
-        this.$store.dispatch('setCategories', categories)
-        // setting list categories to global scope
-      } catch (e) {
-        this.$store.dispatch('handleError', 'failed')
-      }
-    },
     cutCharacter (input) {
       return Common.cutCharacter(input, 200)
     }
   },
-  created () {
-    this.getCategories()
+
+  computed: {
+    categories: function () {
+      return this.$store.state.categories
+    }
   }
 }
 </script>
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-section {
-    padding: 100px 0;
-}
-
 a.category-details {
   text-decoration: none;
   background-color: rgba(143, 211, 232, 1);
@@ -87,35 +73,36 @@ a.category-details:hover {
   border-color: rgba(247, 247, 247, 1);
 }
 
-@media (min-width: 992px)
-.service-box {
-    margin: 20px auto 0;
-}
+/* @media (min-width: 992px) { */
+  .service-box {
+      margin: 20px auto 0;
+  }
 
-.text-primary {
-    color: #8FD3E8 !important;
-}
+  .text-primary {
+      color: #8FD3E8 !important;
+  }
 
-.service-box {
-    max-width: 400px;
-    margin: 50px auto 0;
-    overflow: hidden;
-    padding-bottom: 50px;
-}
+  .service-box {
+      max-width: 400px;
+      margin: 50px auto 0;
+      overflow: hidden;
+      padding-bottom: 50px;
+  }
 
-.service-box img {
-  width: 70px;
-  height: 70px;
-}
+  .service-box img {
+    width: 70px;
+    height: 70px;
+  }
 
-.service-box h3 {
-    font: normal normal normal 22px/1.4em 'chelsea market',fantasy;
-    color: #8FD3E8;
-    text-transform: lowercase;
-}
-.service-box p {
-    font: normal normal normal 15px/1.4em proxima-n-w01-reg,sans-serif;
-    color: #666565;
-    text-transform: lowercase;
-}
+  .service-box h3 {
+      font: normal normal normal 22px/1.4em 'chelsea market',fantasy;
+      color: #8FD3E8;
+      text-transform: lowercase;
+  }
+  .service-box p {
+      font: normal normal normal 15px/1.4em proxima-n-w01-reg,sans-serif;
+      color: #666565;
+      text-transform: lowercase;
+  }
+/* } */
 </style>

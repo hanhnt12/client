@@ -62,21 +62,7 @@ export default {
     Modal
   },
 
-  props: ['showProduct', 'product'],
-
-  data () {
-    return {
-    }
-  },
-
-  methods: {
-  },
-
-  created () {
-  },
-
-  computed: {
-  }
+  props: ['showProduct', 'product']
 }
 </script>
 

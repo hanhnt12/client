@@ -1,16 +1,31 @@
 <template>
-  <span :class="badgeClass">{{categoryLabel}}</span>
+  <span :class="badgeClass">{{categoryLabel(category)}}</span>
 </template>
 
 <script>
-import Common from '@/common'
 export default {
   name: 'CategoryBadge',
   data () {
     return {
     }
   },
+
   props: ['category'],
+
+  methods: {
+    categoryLabel (category) {
+      let categories = this.$store.state.categories
+
+      for (let i = 0; i < categories.length; i++) {
+        if (category === categories[i].name) {
+          return categories[i].nameMenu
+        }
+      }
+
+      return 'pets'
+    }
+  },
+
   computed: {
     badgeClass: function () {
       let returnClass = 'badge badge-pill badge-'
@@ -30,9 +45,6 @@ export default {
       }
 
       return returnClass
-    },
-    categoryLabel: function () {
-      return Common.convertCategory(this.category)
     }
   }
 }

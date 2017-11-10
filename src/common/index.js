@@ -8,10 +8,11 @@ export default {
     }
   },
 
+  // export price
   calculatePrice (price) {
     price = parseInt(price)
 
-    if (isNaN(price)) {
+    if (!price || isNaN(price)) {
       return 'Liên hệ'
     }
 
@@ -37,18 +38,5 @@ export default {
     }
 
     return '/static/img/no-image.jpg'
-  },
-
-  convertCategory (category) {
-    switch (category) {
-      case 'pets':
-        return 'pets'
-      case 'accessory':
-        return 'Phụ kiện'
-      case 'service':
-        return 'Dịch vụ'
-      default:
-        return 'pets'
-    }
   }
 }

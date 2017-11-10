@@ -28,9 +28,6 @@
     </div>
   </div>
   <!-- /.row -->
-
-  <loader :loading="loading"></loader>
-
 </div>
 <!-- /.container -->
 </template>
@@ -50,7 +47,6 @@ export default {
 
   data () {
     return {
-      loading: false,
       product: null
     }
   },
@@ -59,16 +55,20 @@ export default {
     // get product details
     async getProduct (productId) {
       try {
-        this.loading = true
+        this.$store.dispatch('isLoading', true)
 
         var response = await Services.getProduct(productId)
 
+        // when have error
+        if (!response.data || response.data.success === false) {
+          throw new Error()
+        }
+
         this.product = response.data
 
-        this.loading = false
+        this.$store.dispatch('isLoading', false)
       } catch (e) {
-        this.$emit('error', e)
-        console.log(e)
+        this.$store.dispatch('handleError', true)
       }
     },
 
@@ -85,12 +85,16 @@ export default {
     getOtherImages (product) {
       // get default image
       let defaultImage = this.getProductImage(product)
+
       let images = product.image
+
       let result = []
+
       // loop all image
       if (images.length > 1) {
         for (let i = 0; i < images.length; i++) {
           let imagePath = images[i].pathImage
+
           if (imagePath !== defaultImage) {
             result.push(imagePath)
           }
@@ -116,9 +120,5 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@media (min-width: 992px) {
-  body {
-    padding-top: 56px;
-  }
-}
+
 </style>

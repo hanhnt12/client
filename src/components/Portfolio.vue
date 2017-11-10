@@ -34,22 +34,28 @@ export default {
       portfolios: []
     }
   },
+
   methods: {
     // get list products
     async getPortfolio () {
       try {
-        this.loading = true
+        this.$store.dispatch('isLoading', true)
 
         var response = await Services.getPortfolio()
 
+        // when have error
+        if (!response.data || response.data.success === false) {
+          throw new Error()
+        }
+
         this.portfolios = response.data
 
-        this.loading = false
+        this.$store.dispatch('isLoading', false)
       } catch (e) {
-        this.$emit('error', e)
-        console.log(e)
+        this.$store.dispatch('handleError', true)
       }
     },
+
     // get product image
     getPortfolioImage (product) {
       return Common.getProductImage(product)

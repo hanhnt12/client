@@ -45,10 +45,20 @@ export default {
   methods: {
     async getContactInfo () {
       try {
+        this.$store.dispatch('isLoading', true)
+
         const contact = await Services.getContactInfo()
+
+        // when have error
+        if (!contact.data || contact.data.success === false) {
+          throw new Error()
+        }
+
         this.contact = contact.data
+
+        this.$store.dispatch('isLoading', false)
       } catch (e) {
-        this.$store.dispatch('handleError', 'failed')
+        this.$store.dispatch('handleError', true)
       }
     }
   },
@@ -59,8 +69,4 @@ export default {
 </script>
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-.navbar {
-  background: rgba(247, 247, 247, 1);
-  opacity: .7;
-}
 </style>

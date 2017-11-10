@@ -20,7 +20,6 @@ export default {
 
   data () {
     return {
-      loading: false,
       products: []
     }
   },
@@ -28,16 +27,20 @@ export default {
     // get list products
     async getBanner () {
       try {
-        this.loading = true
+        this.$store.dispatch('isLoading', true)
 
         var response = await Services.getBannerInfo()
 
+        // when have error
+        if (!response.data || response.data.success === false) {
+          throw new Error()
+        }
+
         this.products = response.data
 
-        this.loading = false
+        this.$store.dispatch('isLoading', false)
       } catch (e) {
-        this.$emit('error', e)
-        console.log(e)
+        this.$store.dispatch('handleError', true)
       }
     }
   },
@@ -49,16 +52,14 @@ export default {
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-
-
 .ccarousel-control-prev,
 .carousel-control-next {
-	opacity: 1;
-	filter: alpha(opacity=100);
-	background-image: none;
-  background-repeat: no-repeat;
-  color: #333;
-	text-shadow: none;
+    opacity: 1;
+    filter: alpha(opacity=100);
+    background-image: none;
+    background-repeat: no-repeat;
+    color: #333;
+    text-shadow: none;
 }
 
 .carousel-caption {

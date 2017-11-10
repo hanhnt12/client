@@ -36,11 +36,7 @@
 
 <script>
 export default {
-  name: 'NavBar',
-  data () {
-    return {
-    }
-  }
+  name: 'NavBar'
 }
 </script>
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
@@ -51,43 +47,43 @@ export default {
 }
 
 #mainNav {
-  /* position: absolute; */
-  border-bottom: 1px solid #333;
-  background: #333;
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+    /* position: absolute; */
+    border-bottom: 1px solid #cecece;
+    background: #fff;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; 
 }
 
 #mainNav .navbar-brand {
-  font-weight: 800;
-  color: #777777; 
+    font-weight: 800;
+    color: #777777; 
 }
 
 #mainNav .navbar-nav > li.nav-item > a {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  text-transform: uppercase; 
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase; 
 }
 
 @media only screen and (min-width: 992px) {
-  #mainNav {
-      border-bottom: 1px solid transparent;
-      background: transparent; 
-  }
-  #mainNav .navbar-brand {
-      padding: 15px 20px;
-      color: #333; 
-  }
-  #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
-      color: #0085A1; 
-  }
-  #mainNav .navbar-nav > li.nav-item > a {
-      padding: 15px 20px;
-      color: #777; 
-  }
-  #mainNav .navbar-nav > li.nav-item > a:focus, #mainNav .navbar-nav > li.nav-item > a:hover {
-      color: #0085A1; 
-  } 
+    #mainNav {
+        border-bottom: 1px solid transparent;
+        background: transparent; 
+    }
+    #mainNav .navbar-brand {
+        padding: 15px 20px;
+        color: #333; 
+    }
+    #mainNav .navbar-brand:focus, #mainNav .navbar-brand:hover {
+        color: #0085A1; 
+    }
+    #mainNav .navbar-nav > li.nav-item > a {
+        padding: 15px 20px;
+        color: #777; 
+    }
+    #mainNav .navbar-nav > li.nav-item > a:focus, #mainNav .navbar-nav > li.nav-item > a:hover {
+        color: #0085A1; 
+    } 
 }
 @media only screen and (min-width: 1170px) {
   #mainNav {
