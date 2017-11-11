@@ -8,6 +8,10 @@
       <img class="img-fluid" :src="getProductImage(product)" alt="">
     </div>
     <div class="col-md-4">
+      <h3 class="cost">
+        <s v-if="product.price" class="price">{{calculatePrice(product.price)}}</s>
+        <span v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</span>
+      </h3>
       <h3 class="my-3"> Chi tiết</h3>
       <ul v-if="product.freeItems">
         <li v-for="free in product.freeItems" :key="free._id">

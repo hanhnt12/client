@@ -33,7 +33,14 @@
       </div>
     </div>
     <div class="col-lg-9" v-if="mostViewProduct.length > 0 || products.length > 0">
+
       <product-carousel :products="mostViewProduct"></product-carousel>
+
+      <pagination :totalPage="totalPage" 
+        :page="page" 
+        @pageChanged="pageChanged">
+      </pagination>
+
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4" 
           v-for="product in products" 
@@ -61,6 +68,12 @@
           Không tồn tại sản phẩm nào
         </div>
       </div>
+
+      <pagination :totalPage="totalPage" 
+        :page="page" 
+        @pageChanged="pageChanged">
+      </pagination>
+
     </div>
     <!-- /.col-lg-9 -->
   </div>
@@ -75,6 +88,7 @@ import Services from '@/api/Services'
 import Common from '@/common'
 import Images from '@/components/ImagesSlider'
 import ProductCarousel from '@/components/ProductCarousel'
+import Pagination from '@/components/Pagination'
 
 export default {
   name: 'Products',
@@ -89,13 +103,15 @@ export default {
       activeLink: '',
       keySearch: '',
       page: 1,
-      perPage: 6
+      perPage: 6,
+      totalPage: 1
     }
   },
 
   components: {
     Images,
-    ProductCarousel
+    ProductCarousel,
+    Pagination
   },
 
   methods: {
@@ -110,6 +126,8 @@ export default {
         if (!response.data || response.data.success === false) {
           throw new Error()
         }
+
+        this.totalPage = parseInt(response.headers['xxx-total-count'])
 
         this.products = response.data
 
@@ -126,6 +144,11 @@ export default {
         page: this.page,
         perPage: this.perPage
       })
+    },
+
+    pageChanged (pageNum) {
+      this.page = pageNum
+      this.searchProduct()
     },
 
     // get most view product to display carousel
@@ -218,11 +241,11 @@ export default {
 }
 
 .price {
-  font-size: 1vw
+  /* font-size: 1vw */
 }
 
 .price-sale {
-  font-size: 1.5vw
+  /* font-size: 1.5vw */
 }
 
 .img-product {
