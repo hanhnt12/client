@@ -10,7 +10,7 @@
       </div>
       <div class="row">
         <div v-if="contact.name" class="col-lg-2 ml-auto text-center">
-          <i class="fa fa-envelope-o fa-4x sr-contact"></i>
+          <i class="fa fa-address-card-o fa-4x sr-contact"></i>
           <p>{{contact.name}}</p>
         </div>
         <div v-if="contact.phone || contact.mobile" class="col-lg-2 text-center">

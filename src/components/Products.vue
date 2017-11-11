@@ -1,7 +1,28 @@
 <template>
 <div class="container">
+  <div class="row search-area">
+    <div class="col-sm-7 col-md-7"></div>
+    <div class="col-sm-5 col-md-5">
+      <form id="search-product" 
+        role="search" action="" method="POST" class="navbar-form">
+        <div class="input-group">
+          <input id="input-search" 
+            placeholder="Tìm kiếm sản phẩm." 
+            name="q" autocomplete="off" 
+            class="form-control"
+            v-model="keySearch"
+            />
+          <span id="searchClear" class="glyphicon glyphicon-remove"></span>
+          <div class="input-group-btn">
+            <button id="btn-search" @click.prevent.self="searchProduct" class="btn btn-default"><i class="fa fa-search"></i></button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <div class="row">
-    <div class="col-lg-3">
+    <div class="col-lg-3" v-if="categories.length > 0">
       <h1 class="my-4 section-heading">Danh mục</h1>
       <div class="list-group">
         <router-link v-for="category in categories" 
@@ -11,7 +32,7 @@
           :class="{active: calculateActive(category.name)}">{{category.nameMenu}} &gt;&gt;</router-link>
       </div>
     </div>
-    <div class="col-lg-9">
+    <div class="col-lg-9" v-if="mostViewProduct.length > 0 || products.length > 0">
       <product-carousel :products="mostViewProduct"></product-carousel>
       <div class="row">
         <div class="col-lg-4 col-md-6 mb-4" 
@@ -35,6 +56,9 @@
               <span v-else class="price-sale">Liên hệ</span>
             </div>
           </div>
+        </div>
+        <div v-if="products.length < 1" class="col-sm-12 alert alert-warning not-found">
+          Không tồn tại sản phẩm nào
         </div>
       </div>
     </div>
@@ -62,7 +86,10 @@ export default {
       images: [],
       showImage: false,
       mostViewProduct: [],
-      activeLink: ''
+      activeLink: '',
+      keySearch: '',
+      page: 1,
+      perPage: 6
     }
   },
 
@@ -90,6 +117,15 @@ export default {
       } catch (e) {
         this.$store.dispatch('handleError', true)
       }
+    },
+
+    searchProduct () {
+      this.getProducts({
+        category: this.$route.params.category,
+        q: this.keySearch,
+        page: this.page,
+        perPage: this.perPage
+      })
     },
 
     // get most view product to display carousel
@@ -148,7 +184,7 @@ export default {
 
     this.activeLink = category
 
-    this.getProducts(category)
+    this.searchProduct()
 
     this.getProductsMostView()
   },
@@ -163,6 +199,7 @@ export default {
     // call again the method if the route changes
     '$route.params.category': function (category) {
       this.activeLink = category
+      this.keySearch = ''
       this.getProducts(category)
     }
   }
@@ -171,6 +208,15 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.search-area {
+  padding: 20px 0px;
+}
+
+.not-found {
+  padding: 50px;
+  font-size: 30px;
+}
+
 .price {
   font-size: 1vw
 }

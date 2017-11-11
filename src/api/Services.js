@@ -5,8 +5,10 @@ export default {
   // get list products
   getProducts (param) {
     var url = 'products'
-    if (param) {
+    if (typeof param === 'string') {
       url = path.resolve(url, param)
+    } else if (typeof param === 'object') {
+      return Api().post(url, param)
     }
     return Api().get(url)
   },

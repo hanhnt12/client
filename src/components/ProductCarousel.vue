@@ -1,5 +1,5 @@
 <template>
-<div class="">
+<div class="" v-if="productSlide.length > 0">
   <div id="carouselProduct" class="carousel slide my-4" data-ride="carousel">
     <ol class="carousel-indicators">
       <li v-for="(product, index) in productSlide" 
