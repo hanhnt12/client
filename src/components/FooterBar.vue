@@ -9,28 +9,15 @@
             <a href="#">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a href="#">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a href="#">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
               </span>
             </a>
           </li>
         </ul>
         <p class="copyright text-muted">Copyright &copy; 2017</p>
+        <p class="text-center footer-logo">
+          <router-link to="/">Lâm Trang petstore</router-link>
+        </p>
       </div>
     </div>
   </div>
@@ -67,6 +54,7 @@ a {
 
 a:focus, a:hover {
     color: #0085a1;
+    text-decoration: none;
 }
 
 footer .copyright {
@@ -78,5 +66,9 @@ footer .copyright {
 p {
     line-height: 1.5;
     margin: 30px 0;
+}
+
+.footer-logo {
+  font-weight: bold;
 }
 </style>
