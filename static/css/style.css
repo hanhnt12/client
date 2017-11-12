@@ -63,3 +63,26 @@ ul {
   color: #9D0D0D;
   font-weight: bold;
 }
+
+@media (min-width: 992px) {
+  html, body {
+    overflow: auto;
+  }
+  ::-webkit-scrollbar
+  {
+    width: 5px;  /* for vertical scrollbars */
+    height: 10px; /* for horizontal scrollbars */
+  }
+
+  ::-webkit-scrollbar-track
+  {
+    background: rgba(63, 208, 252, 0.1);
+    opacity: .5;
+  }
+
+  ::-webkit-scrollbar-thumb
+  {
+    background: rgba(63, 208, 252, 0.1);
+    opacity: .5
+  }
+}

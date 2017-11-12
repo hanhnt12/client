@@ -13,12 +13,20 @@
           <i class="fa fa-address-card-o fa-3x sr-contact"></i>
           <p>{{contact.name}}</p>
         </div>
-        <div v-if="contact.phone || contact.mobile" class="col-lg-2 col-md-4 text-center">
-          <i class="fa fa-phone fa-3x sr-contact"></i>
+        <div v-if="contact.phone || contact.mobile" class="col-lg-3 col-md-4 text-center">
           <p v-if="contact.phone || contact.mobile">
-            {{contact.phone}}
-            <br>
-            {{contact.mobile}}
+            <a v-if="contact.phone" :href="callPhone" class="phone-contact">
+              <h4>
+                <i class="fa fa-phone fa-1x sr-contact"></i>
+                {{contact.phone}}
+              </h4>
+            </a>
+            <a v-if="contact.mobile" :href="callMobile" class="phone-contact">
+              <h4>
+                <i class="fa fa-mobile fa-1x sr-contact"></i>
+                {{contact.mobile}}
+              </h4>
+            </a>
           </p>
         </div>
         <div v-if="contact.email" class="col-lg-2 col-md-4 mr-auto text-center">
@@ -49,10 +57,27 @@ export default {
   computed: {
     contact: function () {
       return this.$store.state.contact
+    },
+
+    callPhone: function () {
+      return 'tel:' + this.contact.phone
+    },
+
+    callMobile: function () {
+      return 'tel:' + this.contact.mobile
     }
+
   }
 }
 </script>
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
+.phone-contact {
+  text-decoration: none;
+}
+.phone-contact h4 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #d0011b;
+}
 </style>
