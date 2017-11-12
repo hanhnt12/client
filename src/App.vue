@@ -6,6 +6,7 @@
     <footer-bar/>
     <loader :loading="loading"></loader>
     <modal-error :showModal="hasError" @close="closeModal"></modal-error>
+    <scroll-top :display="displayScroll"></scroll-top>
   </div>
 </template>
 
@@ -14,6 +15,7 @@ import NavBar from '@/components/NavBar'
 import FooterBar from '@/components/FooterBar'
 import Loader from '@/components/Loader'
 import ModalError from '@/components/ModalError'
+import ScrollTop from '@/components/ScrollTop'
 
 export default {
   name: 'app',
@@ -21,11 +23,13 @@ export default {
     NavBar,
     FooterBar,
     Loader,
+    ScrollTop,
     ModalError
   },
 
   data: function () {
     return {
+      displayScroll: false
     }
   },
 
@@ -33,6 +37,10 @@ export default {
     closeModal () {
       this.$store.dispatch('handleError', false)
       this.$store.dispatch('isLoading', false)
+    },
+
+    handleScroll: function (event) {
+      this.displayScroll = window.scrollY > 20
     }
   },
 
@@ -47,6 +55,11 @@ export default {
 
   created () {
     this.$store.dispatch('setCategories')
+    window.addEventListener('scroll', this.handleScroll)
+  },
+
+  destroyed () {
+    window.removeEventListener('scroll', this.handleScroll)
   },
 
   mounted () {
