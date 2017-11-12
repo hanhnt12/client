@@ -12,18 +12,20 @@
       <div class="carousel-item" 
         v-for="(product, index) in productSlide" 
         :key="product._id" :class="{active: index === 0}">
-        <img class="d-block img-fluid img-responsive" :class="newClass" :src="product.image">
-        <div class="carousel-caption d-md-block">
-          <h4>{{product.title}}</h4>
-          <p>
-            <s v-if="product.price" class="price">{{calculatePrice(product.price)}}</s> 
-            <span v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</span>
-          </p>
-          <div>
-            <router-link class="btn btn-theme btn-sm btn-min-block"
-              :to="{path: '/product/' + product._id + '/details'}">Chi tiết</router-link>
+        <router-link :to="{path: '/product/' + product._id + '/details'}">
+          <img class="d-block img-fluid img-responsive" :class="newClass" :src="product.image">
+          <div class="carousel-caption d-md-block">
+            <h4>{{product.title}}</h4>
+            <!-- <p>
+              <s v-if="product.price" class="price">{{calculatePrice(product.price)}}</s> 
+              <span v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</span>
+            </p>
+            <div>
+              <router-link class="btn btn-theme btn-sm btn-min-block"
+                :to="{path: '/product/' + product._id + '/details'}">Chi tiết</router-link>
+            </div> -->
           </div>
-        </div>
+        </router-link>
       </div>
     </div>
     <a class="carousel-control-prev" href="#carouselProduct" role="button" data-slide="prev">
@@ -133,7 +135,7 @@ export default {
 
 .carousel-caption {
     position: absolute;
-    top: 0%;
+    top: 30%;
     left: 1.8%;
     right: auto;
     width: 96.66666666666666%;
