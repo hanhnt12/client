@@ -11,13 +11,18 @@ export default new Vuex.Store({
 
   state: {
     error: false,
-    categories: [],
+    categories: null,
+    contact: null,
     loading: false
   },
 
   mutations: {
     setCategories (state, categories) {
       state.categories = categories
+    },
+
+    setContact (state, contact) {
+      state.contact = contact
     },
 
     handleError (state, error) {
@@ -50,6 +55,24 @@ export default new Vuex.Store({
       } else {
         commit('setCategories', categories)
       }
+    },
+
+    setContact ({commit}) {
+      commit('isLoading', true)
+
+      Services.getContactInfo()
+        .then((response) => {
+          if (response.data.success === false) {
+            throw new Error()
+          }
+
+          commit('setContact', response.data)
+
+          commit('isLoading', false)
+        })
+        .catch((e) => {
+          commit('handleError', true)
+        })
     },
 
     handleError ({commit}, err) {

@@ -46,6 +46,12 @@ export default {
     }
   },
 
+  created () {
+    if (!this.categories) {
+      this.$store.dispatch('setCategories')
+    }
+  },
+
   computed: {
     categories: function () {
       return this.$store.state.categories

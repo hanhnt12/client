@@ -33,37 +33,23 @@
 </template>
 
 <script>
-import Services from '@/api/Services'
-
 export default {
   name: 'Contact',
   data () {
     return {
-      contact: {}
     }
   },
-  methods: {
-    async getContactInfo () {
-      try {
-        this.$store.dispatch('isLoading', true)
 
-        const contact = await Services.getContactInfo()
-
-        // when have error
-        if (!contact.data || contact.data.success === false) {
-          throw new Error()
-        }
-
-        this.contact = contact.data
-
-        this.$store.dispatch('isLoading', false)
-      } catch (e) {
-        this.$store.dispatch('handleError', true)
-      }
-    }
-  },
   created () {
-    this.getContactInfo()
+    if (!this.contact) {
+      this.$store.dispatch('setContact')
+    }
+  },
+
+  computed: {
+    contact: function () {
+      return this.$store.state.contact
+    }
   }
 }
 </script>
