@@ -13,9 +13,9 @@
         <span v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</span>
       </h3>
       <h3 class="my-3"> Chi tiết</h3>
-      <ul v-if="product.freeItems">
+      <ul class="product-info" v-if="product.freeItems">
         <li v-for="free in product.freeItems" :key="free._id">
-          {{free.title}}: {{free.value}}
+          <strong>{{free.title}}:</strong> {{free.value}}
         </li>
       </ul>
     </div>
@@ -124,5 +124,13 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.product-info {
+  padding: 0px 0px 0px 20px;
+}
+
+.product-info li {
+  line-height: 20px;
+  letter-spacing: 1px;
+}
 
 </style>
