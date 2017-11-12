@@ -114,7 +114,7 @@ export default {
 <style scoped>
 .carousel-inner .img-default {
     width: 100%;
-    height: 300px;
+    height: 230px;
 }
 
 .carousel-inner .img-header {
