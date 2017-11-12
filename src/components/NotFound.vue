@@ -1,12 +1,14 @@
 <template>
-  <div class='error'>
-    <div class="welcome_div error_div">
-      <div class="error_info">
-        <span>Oops, the page you're looking for does not exist!!</span>
+  <div class='container'>
+    <div class="row page-error text-center">
+      <div class="col-lg-12 error_info">
+        <h1>Rất tiếc, trang bạn đang tìm kiếm không tồn tại !!</h1>
       </div>
       <img src="/images/error-3.svg" alt="" />
-      <div class="error_bottom">
-        <router-link to='/' class="pri_btn error_login">Try going to homepage</router-link>
+      <div class="col-lg-12 error_bottom">
+        <h3>
+          <router-link to='/' class="pri_btn error_login">Thử đi tới trang chủ</router-link>
+        </h3>
       </div>
     </div>
   </div>

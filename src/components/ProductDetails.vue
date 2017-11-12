@@ -32,6 +32,7 @@
     </div>
   </div>
   <!-- /.row -->
+  <contact-floating :display="true"></contact-floating>
 </div>
 <!-- /.container -->
 </template>
@@ -41,12 +42,14 @@ import Services from '@/api/Services'
 import Common from '@/common'
 import Loader from '@/components/Loader'
 import CategoryBadge from '@/components/CategoryBadge'
+import ContactFloating from '@/components/ContactFloating'
 
 export default {
   name: 'ProductDetails',
   components: {
     Loader,
-    CategoryBadge
+    CategoryBadge,
+    ContactFloating
   },
 
   data () {
