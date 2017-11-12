@@ -5,7 +5,7 @@
   </h1>
   <div class="row">
     <div class="col-md-8">
-      <img class="img-fluid" :src="getProductImage(product)" alt="">
+      <img class="img-fluid img-responsive main-img" :src="getProductImage(product)" alt="">
     </div>
     <div class="col-md-4">
       <h3 class="cost">
@@ -134,6 +134,10 @@ export default {
 .product-info li {
   line-height: 20px;
   letter-spacing: 1px;
+}
+
+.main-img {
+  max-height: 500px;
 }
 
 </style>
