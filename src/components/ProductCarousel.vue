@@ -13,7 +13,7 @@
         v-for="(product, index) in productSlide" 
         :key="product._id" :class="{active: index === 0}">
         <router-link :to="{path: '/product/' + product._id + '/details'}">
-          <img class="d-block img-fluid img-responsive" :class="newClass" :src="product.image">
+          <img class="d-block img-fluid" :class="newClass" :src="product.image">
           <div class="carousel-caption d-md-block">
             <h4>{{product.title}}</h4>
             <!-- <p>
@@ -28,14 +28,14 @@
         </router-link>
       </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselProduct" role="button" data-slide="prev">
+    <!-- <a class="carousel-control-prev" href="#carouselProduct" role="button" data-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="sr-only">Previous</span>
     </a>
     <a class="carousel-control-next" href="#carouselProduct" role="button" data-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="sr-only">Next</span>
-    </a>
+    </a> -->
   </div>
 </div>
 <!-- /.container --> 
@@ -144,7 +144,8 @@ export default {
 
 .carousel-caption h4 {
     font: normal normal normal 70px/1.4em 'chelsea market',fantasy;
-    font-size: 3.5vw;
+    /* font-size: 3.5vw; */
+    font-size: 30px;
     color: #486A74;
 }
 
