@@ -22,7 +22,7 @@
   </div>
 
   <div class="row">
-    <div class="col-lg-3" v-if="categories.length > 0">
+    <div class="col-lg-3" v-if="categories && categories.length > 0">
       <h1 class="my-4 section-heading">Danh mục</h1>
       <div class="list-group">
         <router-link v-for="category in categories" 

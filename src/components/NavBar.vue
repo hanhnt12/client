@@ -43,11 +43,6 @@ export default {
 </script>
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-.clear-fix {
-    width: 100%;
-    height: 70px;
-}
-
 #mainNav {
     /* position: absolute; */
     border-bottom: 1px solid #cecece;
@@ -65,6 +60,10 @@ export default {
     font-weight: 800;
     letter-spacing: 1px;
     text-transform: uppercase; 
+}
+
+li.nav-item:hover {
+    border-bottom: 3px solid #0085A1;
 }
 
 @media only screen and (min-width: 992px) {
