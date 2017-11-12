@@ -2,9 +2,9 @@
 <section class="p-0" id="portfolio">
   <div class="container-fluid">
     <div class="row no-gutter popup-gallery">
-      <div v-for="(portfolio, index) in portfolios" :key="index" class="col-lg-4 col-md-4 col-sm-6">
+      <div v-for="(portfolio, index) in portfolios" :key="index" class="col-lg-4 col-md-4 col-sm-6 text-center">
         <router-link class="portfolio-box" :to="{path: '/product/' + portfolio._id + '/details'}">
-          <img class="img-fluid" :src="getPortfolioImage(portfolio)" alt="">
+          <img class="img-fluid img-responsive" :src="getPortfolioImage(portfolio)" alt="">
           <div class="portfolio-box-caption">
             <div class="portfolio-box-caption-content">
               <div v-if="portfolio.title" class="project-category text-faded">
@@ -100,6 +100,9 @@ export default {
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
     transition: all 0.2s; 
+}
+
+.popup-gallery img {
 }
 
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content {

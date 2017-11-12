@@ -38,6 +38,12 @@ export default {
         return 'https://facebook.com'
       }
     }
+  },
+
+  created () {
+    if (!this.contact) {
+      this.$store.dispatch('setContact')
+    }
   }
 }
 </script>
