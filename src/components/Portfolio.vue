@@ -99,10 +99,13 @@ export default {
     background: rgba(107, 158, 174, 0.5);
     -webkit-transition: all 0.2s;
     -moz-transition: all 0.2s;
-    transition: all 0.2s; 
+    transition: all 0.2s;
+    border: 1px solid rgba(107, 158, 174, 0.5);
+    border-radius: 5px;
 }
 
-.popup-gallery img {
+.portfolio-box img {
+  height: 250px;
 }
 
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content {
@@ -130,7 +133,8 @@ export default {
 }
 
 .portfolio-box:hover .portfolio-box-caption {
-    opacity: 1; 
+    opacity: 1;
+    transition: 0.5s; 
 }
 
 .portfolio-box:focus {
