@@ -28,8 +28,10 @@
         <router-link v-for="category in categories" 
           :key="category._id"
           :to="{path: '/products/' + category.name}" 
-          class="list-group-item"
-          :class="{active: calculateActive(category.name)}">{{category.nameMenu}} &gt;&gt;</router-link>
+          class="list-group-item menu-item"
+          :class="{active: calculateActive(category.name)}">
+          <span>{{category.nameMenu}}</span>
+        </router-link>
       </div>
     </div>
     <div class="col-lg-9" v-if="mostViewProduct.length > 0 || products.length > 0">
@@ -252,9 +254,24 @@ export default {
   max-height: 150px;
 }
 
-a.active {
+.menu-item.active {
   font-weight: bold;
   background-color: #8FD3E8;
   border-color: #8FD3E8;
+}
+
+.menu-item {
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+.menu-item:hover {
+  background-color: #8FD3E8;
+  opacity: .5;
+  border-color: #8FD3E8;
+  transition: 0.5s;
+  color: #333;
 }
 </style>
