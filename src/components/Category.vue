@@ -12,14 +12,14 @@
     <div class="row">
       <div v-for="category in categories" 
         :key="category._id" 
-        class="col-lg-4 col-md-6 text-center">
+        class="col-lg-4 col-md-4 text-center">
         <div class="service-box">
           <!-- <i class="fa fa-4x fa-diamond text-primary sr-icons"></i> -->
           <img class="img-circle img-responsive" 
             :src="'http://localhost:3000/images/' + category.imagePath"
             :alt="category.imagePath"/>
           <h3>{{category.title}}</h3>
-          <p class="text-muted">{{cutCharacter(category.description)}}</p>
+          <p class="text-muted description">{{cutCharacter(category.description)}}</p>
           <router-link 
             :to="{path: 'products/' + category.name}" 
             class="category-details">Chi tiết &gt;&gt;</router-link>
@@ -71,6 +71,16 @@ a.category-details {
 a.category-details:hover {
   background-color: rgba(107, 158, 174, 1);
   border-color: rgba(247, 247, 247, 1);
+}
+
+.description {
+  text-align: justify;
+}
+
+@media (max-width: 600px) {
+  .service-box {
+      padding: 0px 20px;
+  }
 }
 
 /* @media (min-width: 992px) { */
