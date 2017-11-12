@@ -3,21 +3,18 @@
 <footer>
   <div class="container">
     <div class="row">
-      <div class="col-lg-8 col-md-10 mx-auto">
-        <ul class="list-inline text-center">
-          <li class="list-inline-item">
-            <a href="#">
-              <span class="fa-stack fa-lg">
-                <i class="fa fa-circle fa-stack-2x"></i>
-                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-              </span>
-            </a>
-          </li>
-        </ul>
+      <div class="col-lg-8 col-md-10 mx-auto text-center">
+        <a :href="facebookLink" target="_blank">
+          <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+          </span>
+          Lâm Trang petstore
+        </a>
         <p class="copyright text-muted">Copyright &copy; 2017</p>
-        <p class="text-center footer-logo">
+        <!-- <p class="text-center footer-logo">
           <router-link to="/">Lâm Trang petstore</router-link>
-        </p>
+        </p> -->
       </div>
     </div>
   </div>
@@ -30,6 +27,17 @@ export default {
   data () {
     return {
     }
+  },
+
+  computed: {
+    facebookLink: function () {
+      let contact = this.$store.state.contact
+      if (contact) {
+        return this.$store.state.contact.facebookLink
+      } else {
+        return 'https://facebook.com'
+      }
+    }
   }
 }
 </script>
@@ -40,35 +48,24 @@ footer {
     padding: 50px 0 65px;
 }
 
-footer .list-inline {
-    margin: 0;
-    padding: 0;
-}
-
 a {
-    color: #333;
+    color: #3b5998;
     -webkit-transition: all .2s;
     -moz-transition: all .2s;
     transition: all .2s;
 }
 
 a:focus, a:hover {
-    color: #0085a1;
+    color: #29487d;
     text-decoration: none;
 }
 
 footer .copyright {
     font-size: 14px;
-    margin-bottom: 0;
-    text-align: center;
 }
 
 p {
     line-height: 1.5;
     margin: 30px 0;
-}
-
-.footer-logo {
-  font-weight: bold;
 }
 </style>
