@@ -3,21 +3,23 @@
   <div class="row search-area">
     <div class="col-sm-7 col-md-7"></div>
     <div class="col-sm-5 col-md-5">
-      <form id="search-product" 
-        role="search" action="" method="POST" class="navbar-form">
+      <div id="search-product form-control" class="navbar-form">
         <div class="input-group">
           <input id="input-search" 
             placeholder="Tìm kiếm sản phẩm." 
             name="q" autocomplete="off" 
             class="form-control"
             v-model="keySearch"
+            @keyup.enter.prevent="searchProduct" 
             />
           <span id="searchClear" class="glyphicon glyphicon-remove"></span>
           <div class="input-group-btn">
-            <button id="btn-search" @click.prevent.self="searchProduct" class="btn btn-default"><i class="fa fa-search"></i></button>
+            <button id="btn-search" 
+              @click.prevent="searchProduct" 
+              class="btn btn-default"><i class="fa fa-search"></i></button>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 
@@ -141,7 +143,7 @@ export default {
 
     searchProduct () {
       this.getProducts({
-        category: this.$route.params.category,
+        // category: this.$route.params.category,
         q: this.keySearch,
         page: this.page,
         perPage: this.perPage

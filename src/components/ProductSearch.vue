@@ -1,17 +1,19 @@
 <template>
-<div class="row">
-    <div class="col-sm-5 col-md-5">
-        <form class="navbar-form" id="search-product" role="search" action="" method="GET">
-            <div class="input-group">
-                <input class="form-control" id="input-search" placeholder="Tìm kiếm sản phẩm." name="q" autocomplete="off">
-                <span class="glyphicon glyphicon-remove" id="searchClear"></span>
-                <div class="input-group-btn">
-                    <button class="btn btn-default" id="btn-search" type="submit">
-                      <i class="fa fa-search"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
+<div id="search-product form-control" class="navbar-form">
+    <div class="input-group">
+        <input id="input-search" 
+        placeholder="Tìm kiếm sản phẩm." 
+        name="q" autocomplete="off" 
+        class="form-control"
+        v-model="keySearch"
+        @keyup.enter.prevent="searchProduct" 
+        />
+        <span id="searchClear" class="glyphicon glyphicon-remove"></span>
+        <div class="input-group-btn">
+        <button id="btn-search" 
+            @click.prevent="searchProduct" 
+            class="btn btn-default"><i class="fa fa-search"></i></button>
+        </div>
     </div>
 </div>
 </template>
