@@ -1,5 +1,5 @@
 <template>
-<div v-if="totalPage > 1" class="container paging">
+<div v-if="totalPage > 1" class="paging">
   <div class="row">
       <ul class="pagination">
           <li class="page-item" v-if="page > 1">

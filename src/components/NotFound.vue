@@ -1,5 +1,5 @@
 <template>
-  <div class='container'>
+  <div class=''>
     <div class="row page-error text-center">
       <div class="col-lg-12 error_info">
         <h1>Rất tiếc, trang bạn đang tìm kiếm không tồn tại !!</h1>

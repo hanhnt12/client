@@ -1,6 +1,6 @@
 <template>
 <section id="services">
-  <div class="container">
+  <div class="">
     <div class="row">
       <div class="col-lg-12 text-center">
         <h2 class="section-heading">Dịch vụ của chúng tôi</h2>
@@ -8,7 +8,7 @@
       </div>
     </div>
   </div>
-  <div class="container" v-if="categories && categories.length > 0">
+  <div class="" v-if="categories && categories.length > 0">
     <div class="row">
       <div v-for="category in categories" 
         :key="category._id" 

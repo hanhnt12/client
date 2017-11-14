@@ -1,5 +1,5 @@
 <template>
-<div v-if="product" class="container">
+<div v-if="product" class="">
   <h1 class="my-4">{{product.title}}
     <category-badge :category="product.category.name"></category-badge>
   </h1>
