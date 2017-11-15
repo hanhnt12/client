@@ -1,6 +1,6 @@
 <template>
-<div v-if="product" class="">
-  <h1 class="my-4">{{product.title}}
+<div v-if="product" class="container">
+  <h1 class="my-4 product-heading">{{product.title}}
     <category-badge :category="product.category.name"></category-badge>
   </h1>
   <div class="row">
@@ -12,8 +12,8 @@
         <s v-if="product.price" class="price">{{calculatePrice(product.price)}}</s>
         <span v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</span>
       </h3>
-      <h3 class="my-3"> Chi tiết</h3>
-      <ul class="product-info" v-if="product.freeItems">
+      <h3 class="my-3" v-if="product.freeItems.length > 0"> Chi tiết</h3>
+      <ul class="product-info" v-if="product.freeItems.length > 0">
         <li v-for="free in product.freeItems" :key="free._id">
           <strong>{{free.title}}:</strong> {{free.value}}
         </li>
@@ -21,11 +21,12 @@
     </div>
     <div v-if="product.description" class="col-md-12">
       <h3 class="my-3"> Mô tả sản phẩm</h3>
-      <p>{{product.description}}</p>
+      <p :class="isMoreLength">{{product.description}}</p>
+      <a v-if="isMoreLength" href="#" @click.prevent="showMore">Xem toàn bộ</a>
     </div>
   </div>
   <!-- /.row -->
-  <h3 v-if="otherImage" class="my-4">Hình ảnh khác</h3>
+  <h3 v-if="otherImage.length > 0" class="my-4">Hình ảnh khác</h3>
   <div class="row">
     <div class="col-md-3 col-sm-6 mb-4" v-for="(img, index) in otherImage" :key="index">
       <img class="img-fluid" :src="img" alt="">
@@ -54,7 +55,8 @@ export default {
 
   data () {
     return {
-      product: null
+      product: null,
+      isMoreLength: ''
     }
   },
 
@@ -72,6 +74,10 @@ export default {
         }
 
         this.product = response.data
+
+        if (this.product.description.length > 200) {
+          this.isMoreLength = 'isMoreLength'
+        }
 
         this.$store.dispatch('isLoading', false)
       } catch (e) {
@@ -109,6 +115,10 @@ export default {
       }
 
       return result
+    },
+
+    showMore () {
+      this.isMoreLength = ''
     }
   },
 
@@ -127,6 +137,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.product-heading {
+  padding: 20px;
+}
 .product-info {
   padding: 0px 0px 0px 20px;
 }
@@ -138,6 +151,25 @@ export default {
 
 .main-img {
   max-height: 500px;
+}
+
+.isMoreLength {
+  /* -o-text-overflow: ellipsis;   Opera */
+  /* text-overflow: ellipsis;   IE, Safari (WebKit) */
+  /* overflow: hidden;              don't show excess chars */
+  /* white-space: nowrap;          force single line */
+  /* width: 100%;  */
+  margin: 0;
+  height: 100px;
+  overflow: hidden;
+}
+
+.view-more {
+  display: none;
+}
+
+.isShowMore {
+  display: inline-block;
 }
 
 </style>

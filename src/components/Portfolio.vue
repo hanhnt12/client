@@ -105,7 +105,7 @@ export default {
 }
 
 .portfolio-box img {
-  height: 250px;
+  max-height: 350px;
 }
 
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content {

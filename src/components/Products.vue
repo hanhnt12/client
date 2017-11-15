@@ -25,7 +25,7 @@
 
   <div class="row">
     <div class="col-lg-3" v-if="categories && categories.length > 0">
-      <h1 class="my-4 section-heading">Danh mục</h1>
+      <h1 class="my-4 section-heading">{{ categoryProduct }}</h1>
       <div class="list-group">
         <router-link v-for="category in categories" 
           :key="category._id"
@@ -219,6 +219,14 @@ export default {
   computed: {
     categories: function () {
       return this.$store.state.categories
+    },
+
+    categoryProduct: function () {
+      let categoryProduct = this.$store.state.contact && this.$store.state.contact.categoryProduct
+      if (categoryProduct) {
+        return categoryProduct
+      }
+      return 'Danh mục'
     }
   },
 

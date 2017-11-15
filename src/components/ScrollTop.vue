@@ -30,13 +30,17 @@ export default {
   z-index: 99;
   border: none;
   outline: none;
-  color: white;
+  background: #333;
+  color: #fff;
   cursor: pointer;
-  padding: 5px;
-  border-radius: 10px;
+  font-size: 1.5em;
+  padding: 10px;
+  border-radius: 5px;
+  opacity: .5;
 }
 
 #goTop:hover {
   background-color: #555;
+  opacity: .8;
 }
 </style>

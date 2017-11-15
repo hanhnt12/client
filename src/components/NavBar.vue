@@ -19,13 +19,13 @@
                 to="/products">Sản phẩm</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/#services">Dịch vụ</a>
+              <a class="nav-link js-scroll-trigger" href="/#services" v-smooth-scroll>Dịch vụ</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/#portfolio">Gallery</a>
+              <a class="nav-link js-scroll-trigger" href="/#portfolio" v-smooth-scroll>Gallery</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/#contact">Liên hệ</a>
+              <a class="nav-link js-scroll-trigger" href="/#contact" v-smooth-scroll>Liên hệ</a>
             </li>
           </ul>
         </div>

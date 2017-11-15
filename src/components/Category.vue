@@ -3,12 +3,12 @@
   <div class="">
     <div class="row">
       <div class="col-lg-12 text-center">
-        <h2 class="section-heading">Dịch vụ của chúng tôi</h2>
+        <h2 class="section-heading">{{ categoryHome }}</h2>
         <hr class="primary">
       </div>
     </div>
   </div>
-  <div class="" v-if="categories && categories.length > 0">
+  <div class="container" v-if="categories && categories.length > 0">
     <div class="row">
       <div v-for="category in categories" 
         :key="category._id" 
@@ -55,6 +55,14 @@ export default {
   computed: {
     categories: function () {
       return this.$store.state.categories
+    },
+
+    categoryHome: function () {
+      let categoryHome = this.$store.state.contact && this.$store.state.contact.categoryHome
+      if (categoryHome) {
+        return categoryHome
+      }
+      return 'Dịch vụ của chúng tôi'
     }
   }
 }
