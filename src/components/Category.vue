@@ -16,7 +16,7 @@
         <div class="service-box">
           <!-- <i class="fa fa-4x fa-diamond text-primary sr-icons"></i> -->
           <img class="img-circle img-responsive" 
-            :src="'http://localhost:3000/images/' + category.imagePath"
+            :src="'/images/' + category.imagePath"
             :alt="category.imagePath"/>
           <h3>{{category.title}}</h3>
           <p class="text-muted description">{{cutCharacter(category.description)}}</p>

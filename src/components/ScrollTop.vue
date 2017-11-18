@@ -14,8 +14,13 @@ export default {
 
   methods: {
     gotoTop () {
-      document.body.scrollTop = 0
-      document.documentElement.scrollTop = 0
+      // document.body.scrollTop = 0
+      // document.documentElement.scrollTop = 0
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      })
     }
   }
 }

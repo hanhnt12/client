@@ -19,13 +19,13 @@
                 to="/products">Sản phẩm</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/#services" v-smooth-scroll>Dịch vụ</a>
+              <router-link class="nav-link js-scroll-trigger" to="/#services">Dịch vụ</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/#portfolio" v-smooth-scroll>Gallery</a>
+              <router-link class="nav-link js-scroll-trigger" to="/#portfolio">Gallery</router-link>
             </li>
             <li class="nav-item">
-              <a class="nav-link js-scroll-trigger" href="/#contact" v-smooth-scroll>Liên hệ</a>
+              <router-link class="nav-link js-scroll-trigger" to="/#contact">Liên hệ</router-link>
             </li>
           </ul>
         </div>
@@ -38,7 +38,13 @@
 
 <script>
 export default {
-  name: 'NavBar'
+  name: 'NavBar',
+
+  methods: {
+    scrollSmooth () {
+      alert(window.location)
+    }
+  }
 }
 </script>
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
