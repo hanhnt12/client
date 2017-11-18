@@ -4,7 +4,7 @@
     <category-badge :category="product.category.name"></category-badge>
   </h3>
   <section slot="body" class="p-0" id="portfolio">
-    <div class="container-fluid">
+    <div class="container-fluid wrapper">
       <div id="carouselImage" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li v-for="(image, index) in product.image" :key="image._id" 
@@ -16,8 +16,8 @@
           <div v-for="(image, index) in product.image" 
             :key="image._id" class="carousel-item text-center" 
             :class="{active: index === 0}">
-            <img class="d-block img-fluid img-responsive" :src="image.pathImage" :alt="product.name">
-            <div class="carousel-caption d-md-block">
+            <img class="img-fluid img-responsive" :src="image.pathImage" :alt="product.name">
+            <div class="carousel-caption">
               <p>
                   <s v-if="product.price" class="price">{{product.price}}</s> 
                   <span v-if="product.priceSale" class="price-sale">{{product.priceSale}}</span>
@@ -61,9 +61,8 @@ export default {
 
 <!-- Add 'scoped' attribute to limit CSS to this component only -->
 <style scoped>
-.carousel-inner img {
-    width: 100%;
-    max-height: 500px;
+.wrapper {
+  padding: 0;
 }
 
 .ccarousel-control-prev,

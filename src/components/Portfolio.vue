@@ -1,6 +1,6 @@
 <template>
 <section class="p-0" id="portfolio">
-  <div class="">
+  <div class="container">
     <div class="row no-gutter popup-gallery">
       <div v-for="(portfolio, index) in portfolios" :key="index" class="col-lg-4 col-md-4 col-sm-6 text-center">
         <router-link class="portfolio-box" :to="{path: '/product/' + portfolio._id + '/details'}">
@@ -105,7 +105,6 @@ export default {
 }
 
 .portfolio-box img {
-  max-height: 350px;
 }
 
 .portfolio-box .portfolio-box-caption .portfolio-box-caption-content {

@@ -1,51 +1,33 @@
 <template>
-<div class="" v-if="productSlide.length > 0">
-  <div id="carouselProduct" class="carousel slide my-4" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li v-for="(product, index) in productSlide" 
-        :key="product._id" 
-        data-target="#carouselProduct" 
-        :data-slide-to="index" 
-        :class="{active: index === 0}"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-      <div class="carousel-item" 
-        v-for="(product, index) in productSlide" 
-        :key="product._id" :class="{active: index === 0}">
-        <router-link :to="{path: '/product/' + product._id + '/details'}">
-          <img class="d-block img-fluid" :class="newClass" :src="product.image">
-          <div class="carousel-caption d-md-block">
-            <h4>{{product.title}}</h4>
-            <!-- <p>
-              <s v-if="product.price" class="price">{{calculatePrice(product.price)}}</s> 
-              <span v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</span>
-            </p>
-            <div>
-              <router-link class="btn btn-theme btn-sm btn-min-block"
-                :to="{path: '/product/' + product._id + '/details'}">Chi tiết</router-link>
-            </div> -->
-          </div>
-        </router-link>
-      </div>
-    </div>
-    <!-- <a class="carousel-control-prev" href="#carouselProduct" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselProduct" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="sr-only">Next</span>
-    </a> -->
-  </div>
-</div>
+<carousel-3d v-if="productSlide.length > 0"
+  :autoplay="true"
+  :autoplay-timeout='2500' 
+  :disable3d="false"
+  :width="900"
+  :height="500"
+  class="carousel">
+  <slide v-for="(product, index) in productSlide" 
+    :key="product._id" :index="index">
+    <router-link class="d-block" :to="{path: '/product/' + product._id + '/details'}">
+      <img class="d-block img-fluid" :class="newClass" :src="product.image">
+    </router-link>
+  </slide>
+  </slide>
+</carousel-3d>
 <!-- /.container --> 
 </template>
 
 <script>
 import Common from '@/common'
+import { Carousel3d, Slide } from 'vue-carousel-3d'
 
 export default {
   name: 'ProductCarousel',
+
+  components: {
+    Carousel3d,
+    Slide
+  },
 
   data () {
     return {
@@ -53,9 +35,6 @@ export default {
   },
 
   props: ['products', 'additionClass', 'isHeaderBar'],
-
-  components: {
-  },
 
   methods: {
     // get most view product to display carousel
@@ -69,6 +48,7 @@ export default {
         productConverted.push({
           _id: product._id,
           image: this.getProductImage(product, this.isHeaderBar),
+          // image: '/static/img/900X500_' + i + '.png',
           title: product.title || '',
           price: product.price,
           priceSale: product.priceSale
@@ -93,7 +73,7 @@ export default {
       return Common.cutCharacter(input, 100)
     }
   },
-  created () {
+  ready () {
   },
   computed: {
     productSlide: function () {
@@ -112,58 +92,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.carousel-inner .img-default {
-    width: 100%;
-    height: 230px;
+.carousel {
+} 
+.carousel-3d-slide {
+  height: auto !important;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.25) !important;
 }
 
-.carousel-inner .img-header {
-    width: 100%;
-    max-height: 700px;
-    min-height: 200px;
+.carousel-3d-slide a {
+  height: auto !important;
 }
 
-.ccarousel-control-prev,
-.carousel-control-next {
-	opacity: 1;
-	filter: alpha(opacity=100);
-	background-image: none;
-  background-repeat: no-repeat;
-  color: #333;
-	text-shadow: none;
-}
-
-.carousel-caption {
-    position: absolute;
-    top: 30%;
-    left: 1.8%;
-    right: auto;
-    width: 96.66666666666666%;
-    color: #f8f8f8;
-}
-
-.carousel-caption h4 {
-    font: normal normal normal 70px/1.4em 'chelsea market',fantasy;
-    /* font-size: 3.5vw; */
-    font-size: 30px;
-    color: #486A74;
-}
-
-.btn-min-block {
-    min-width: 170px;
-    line-height: 26px;
-}
-
-.btn-theme {
-    color: #333;
-    background-color: transparent;
-    border: 2px solid #fff;
-    margin-right: 15px;
-}
-
-.btn-theme:hover {
-    color: #333;
-    background-color: #fff;
-    border-color: #fff;
+.carousel-3d-slide img {
+  width: 100%;
 }
 </style>
