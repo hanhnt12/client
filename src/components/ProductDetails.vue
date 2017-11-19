@@ -8,6 +8,14 @@
       <img class="img-fluid img-responsive main-img" :src="getProductImage(product)" alt="">
     </div>
     <div class="col-md-4">
+      <div class="fb-like"
+        :data-href="product.urlShareFB"
+        data-layout="button_count" 
+        data-action="like"
+        data-size="large"
+        data-show-faces="true"
+        data-share="true">
+      </div>
       <h3 class="cost">
         <s v-if="product.price" class="price">{{calculatePrice(product.price)}}</s>
         <span v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</span>
@@ -74,12 +82,16 @@ export default {
         }
 
         this.product = response.data
+        if (this.product) {
+          this.product.urlShareFB = 'product/' + this.product._id + '/details'
+          Common.createFBSEO(document, this.product)
 
-        if (this.product.description.length > 200) {
-          this.isMoreLength = 'isMoreLength'
+          if (this.product.description.length > 200) {
+            this.isMoreLength = 'isMoreLength'
+          }
+
+          this.$store.dispatch('isLoading', false)
         }
-
-        this.$store.dispatch('isLoading', false)
       } catch (e) {
         this.$store.dispatch('handleError', true)
       }
@@ -125,6 +137,15 @@ export default {
   created () {
     let productId = this.$route.params.productId
     this.getProduct(productId)
+    var js
+    var fjs = document.getElementsByTagName('script')[0]
+    if (document.getElementById('facebook-jssdk')) {
+      return
+    }
+    js = document.createElement('script')
+    js.id = 'facebook-jssdk'
+    js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11'
+    fjs.parentNode.insertBefore(js, fjs)
   },
 
   computed: {

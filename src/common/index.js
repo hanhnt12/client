@@ -38,5 +38,18 @@ export default {
     }
 
     return '/static/img/no-image.jpg'
+  },
+
+  createFBSEO (document, product) {
+    // setting title
+    if (product.title) {
+      document.title = product.title || 'Lam trang petstore'
+    }
+
+    // setting facebook share and like
+    document.head.querySelector('meta[property="og:url"]').content = product.urlShareFB
+    document.head.querySelector('meta[property="og:type"]').content = 'website'
+    document.head.querySelector('meta[property="og:description"]').content = product.description
+    document.head.querySelector('meta[property="og:image"]').content = 'https://dummyimage.com/800x500/48ff00/ffffff.jpg'
   }
 }
