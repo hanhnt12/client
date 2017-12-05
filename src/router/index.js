@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Products from '@/components/Products'
 import ProductDetails from '@/components/ProductDetails'
-import NotFound from '@/components/NotFound'
+// import NotFound from '@/components/NotFound'
 // import vueSmoothScroll from 'vue-smooth-scroll'
 
 Vue.use(Router)
@@ -61,10 +61,6 @@ export default new Router({
       path: '/product/:productId/details',
       name: 'ProductDetails',
       component: ProductDetails
-    },
-    {
-      path: '*',
-      component: NotFound
     }
   ],
   scrollBehavior
