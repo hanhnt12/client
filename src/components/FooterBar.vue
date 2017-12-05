@@ -4,7 +4,7 @@
   <div class="">
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto text-center">
-        <a :href="facebookLink" target="_blank">
+        <a :href="facebookLink" target="_blank" class="fbLink">
           <span class="fa-stack fa-lg">
             <i class="fa fa-circle fa-stack-2x"></i>
             <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
@@ -73,5 +73,9 @@ footer .copyright {
 p {
     line-height: 1.5;
     margin: 30px 0;
+}
+
+.fbLink {
+  font-size: 1.5em;
 }
 </style>

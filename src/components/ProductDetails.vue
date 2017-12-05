@@ -5,17 +5,25 @@
   </h1>
   <div class="row">
     <div class="col-md-8">
-      <img class="img-fluid img-responsive main-img" :src="getProductImage(product)" alt="">
+      <img ref="mainImg" class="img-fluid img-responsive main-img" :src="getProductImage(product)" alt="">
+      <h3 v-if="otherImage.length > 0" class="my-4">Hình ảnh khác</h3>
+      <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-3 mb-3" id="relate-img" v-for="(img, index) in otherImage" :key="index">
+          <img class="img-fluid" :src="img" alt="" @click="changeImg">
+        </div>
+      </div>
     </div>
     <div class="col-md-4">
-      <div class="fb-like"
-        :data-href="product.urlShareFB"
-        data-layout="button_count" 
-        data-action="like"
-        data-size="large"
-        data-show-faces="true"
-        data-share="true">
-      </div>
+      <social-sharing :url="product.urlShareFB" class="xxx"
+        inline-template
+        :title="product.title"
+        :description="product.description">
+        <div id="fbShare">
+          <network network="facebook">
+            <i class="fa fa-facebook"></i> Chia sẻ
+          </network>
+        </div>
+      </social-sharing>
       <h3 class="cost">
         <s v-if="product.price" class="price">{{calculatePrice(product.price)}}</s>
         <span v-if="product.priceSale" class="price-sale">{{calculatePrice(product.priceSale)}}</span>
@@ -30,16 +38,11 @@
     <div v-if="product.description" class="col-md-12">
       <h3 class="my-3"> Mô tả sản phẩm</h3>
       <p :class="isMoreLength">{{product.description}}</p>
-      <a v-if="isMoreLength" href="#" @click.prevent="showMore">Xem toàn bộ</a>
+      <a class="btnShowMore"v-if="isMoreLength" href="#" @click.prevent="showMore">Xem toàn bộ</a>
     </div>
   </div>
   <!-- /.row -->
-  <h3 v-if="otherImage.length > 0" class="my-4">Hình ảnh khác</h3>
-  <div class="row">
-    <div class="col-md-3 col-sm-6 mb-4" v-for="(img, index) in otherImage" :key="index">
-      <img class="img-fluid" :src="img" alt="">
-    </div>
-  </div>
+  
   <!-- /.row -->
   <contact-floating :display="true"></contact-floating>
 </div>
@@ -83,7 +86,7 @@ export default {
 
         this.product = response.data
         if (this.product) {
-          this.product.urlShareFB = 'product/' + this.product._id + '/details'
+          this.product.urlShareFB = this.$route.stringifyPath
           Common.createFBSEO(document, this.product)
 
           if (this.product.description.length > 200) {
@@ -131,21 +134,19 @@ export default {
 
     showMore () {
       this.isMoreLength = ''
+    },
+
+    changeImg (event) {
+      let curImg = event.target
+      let mainImgSrc = this.$refs.mainImg.src
+      this.$refs.mainImg.src = curImg.src
+      curImg.src = mainImgSrc
     }
   },
 
-  created () {
+  mounted () {
     let productId = this.$route.params.productId
     this.getProduct(productId)
-    var js
-    var fjs = document.getElementsByTagName('script')[0]
-    if (document.getElementById('facebook-jssdk')) {
-      return
-    }
-    js = document.createElement('script')
-    js.id = 'facebook-jssdk'
-    js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.11'
-    fjs.parentNode.insertBefore(js, fjs)
   },
 
   computed: {
@@ -158,6 +159,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.container {
+  padding: 0;
+}
+
+.xxx span {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #fff;
+  background: #365899;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .product-heading {
   padding: 20px;
 }
@@ -181,8 +195,9 @@ export default {
   /* white-space: nowrap;          force single line */
   /* width: 100%;  */
   margin: 0;
-  height: 100px;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .view-more {
@@ -193,4 +208,10 @@ export default {
   display: inline-block;
 }
 
+.btnShowMore {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.5em;
+}
 </style>

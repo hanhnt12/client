@@ -6,6 +6,9 @@ import ProductDetails from '@/components/ProductDetails'
 // import NotFound from '@/components/NotFound'
 // import vueSmoothScroll from 'vue-smooth-scroll'
 
+var SocialSharing = require('vue-social-sharing')
+Vue.use(SocialSharing)
+
 Vue.use(Router)
 // Vue.use(vueSmoothScroll)
 

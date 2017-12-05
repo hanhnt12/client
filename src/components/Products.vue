@@ -36,9 +36,9 @@
         </router-link>
       </div>
     </div>
-    <div class="col-lg-9" v-if="mostViewProduct.length > 0 || products.length > 0">
+    <div class="col-lg-9" id="main-product">
 
-      <product-carousel :products="mostViewProduct"></product-carousel>
+      <product-carousel v-if="mostViewProduct.length > 0 || products.length > 0" :products="mostViewProduct"></product-carousel>
 
       <pagination :totalPage="totalPage" 
         :page="page" 
@@ -252,12 +252,8 @@ export default {
   font-size: 30px;
 }
 
-.price {
-  /* font-size: 1vw */
-}
-
-.price-sale {
-  /* font-size: 1.5vw */
+.container {
+  padding: 0;
 }
 
 .img-product {
