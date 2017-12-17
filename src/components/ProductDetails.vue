@@ -15,9 +15,11 @@
     </div>
     <div class="col-md-4">
       <social-sharing :url="product.urlShareFB" class="xxx"
-        inline-template
         :title="product.title"
-        :description="product.description">
+        :description="product.description"
+        :quote="product.title"
+        hashtags="lam trang petstore"
+        inline-template>
         <div id="fbShare">
           <network network="facebook">
             <i class="fa fa-facebook"></i> Chia sẻ
@@ -86,7 +88,7 @@ export default {
 
         this.product = response.data
         if (this.product) {
-          this.product.urlShareFB = this.$route.stringifyPath
+          this.product.urlShareFB = this.$route.fullPath
           Common.createFBSEO(document, this.product)
 
           if (this.product.description.length > 200) {
@@ -163,13 +165,21 @@ export default {
   padding: 0;
 }
 
-.xxx span {
-  font-size: 1.5em;
+#fbShare.xxx {
+  display: inline-block;
+  cursor: pointer;
+  font-size: 1.2em !important;
   font-weight: bold;
   color: #fff;
-  background: #365899;
+  background: #4267b2;
+  border: 1px solid #4267b2;
   padding: 5px;
   border-radius: 5px;
+}
+
+#fbShare.xxx:hover {
+  background: #365899;
+  border: 1px solid #365899;
 }
 
 .product-heading {
@@ -177,11 +187,11 @@ export default {
 }
 .product-info {
   padding: 0px 0px 0px 20px;
+  font-size: 1.5em;
 }
 
 .product-info li {
-  line-height: 20px;
-  letter-spacing: 1px;
+  line-height: 1.5em;
 }
 
 .main-img {
