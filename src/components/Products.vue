@@ -10,12 +10,12 @@
             name="q" autocomplete="off" 
             class="form-control"
             v-model="keySearch"
-            @keyup.enter.prevent="searchProduct" 
+            @keyup.enter.prevent="enterKeySearch"
             />
           <span id="searchClear" class="glyphicon glyphicon-remove"></span>
           <div class="input-group-btn">
             <button id="btn-search" 
-              @click.prevent="searchProduct" 
+              @click.prevent="enterKeySearch" 
               class="btn btn-default"><i class="fa fa-search"></i></button>
           </div>
         </div>
@@ -58,7 +58,6 @@
               <h4 class="card-title text-center">
                 <router-link
                   :to="{path: '/product/' + product._id + '/details'}">{{product.title}}</router-link>
-                </a>
               </h4>
             </div>
             <div class="card-footer">
@@ -139,6 +138,11 @@ export default {
       } catch (e) {
         this.$store.dispatch('handleError', true)
       }
+    },
+
+    enterKeySearch () {
+      this.page = 1
+      this.searchProduct()
     },
 
     searchProduct () {
